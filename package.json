@@ -1,0 +1,10 @@
+{
+  "name": "merge",
+  "version": "1.0.0",
+  "description": "对象合并",
+  "main": "dist/index.js",
+  "repository": "https://github.com/blackcater/merge.git",
+  "author": "blackcater <blackcater2015@gmail.com>",
+  "license": "MIT",
+  "private": false
+}
