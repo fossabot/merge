@@ -1,6 +1,6 @@
 import * as util from './util'
 
-/* eslint-disable */
+/* eslint-disable complexity */
 
 /**
  * merge source and target
@@ -23,7 +23,7 @@ export default class Merge {
         nullable: true,
         // undefined 是否有意义
         undefinable: true,
-        ...(options.array || {}),
+        ...(options.array || {})
       },
       object: {
         // 强制 target 为对象
@@ -32,8 +32,8 @@ export default class Merge {
         nullable: true,
         // undefined 是否有意义
         undefinable: true,
-        ...(options.object || {}),
-      },
+        ...(options.object || {})
+      }
     }
   }
 
@@ -42,7 +42,7 @@ export default class Merge {
     if (util.isArray(source)) {
       return this.mergeArray(source, target, {
         ...this.options.array,
-        ...options,
+        ...options
       })
     }
 
@@ -50,7 +50,7 @@ export default class Merge {
     if (util.isObject(source)) {
       return this.mergeObject(source, target, {
         ...this.options.object,
-        ...options,
+        ...options
       })
     }
 
@@ -67,7 +67,11 @@ export default class Merge {
   mergeArray(source, target, options = {}) {
     const opts = {
       ...this.options.array,
-      ...options,
+      ...options
+    }
+
+    if (!util.isArray(source)) {
+      throw new Error('`source` should be an array')
     }
 
     // 强制 target 为 array
@@ -98,10 +102,8 @@ export default class Merge {
         if (opts.merge) {
           list[i] = this.merge(list[i], targetList[i])
         } else if (
-          opts.nullable ||
-          targetList[i] !== null ||
-          opts.undefinable ||
-          targetList[i] !== undefined
+          (opts.nullable || targetList[i] !== null) &&
+          (opts.undefinable || targetList[i] !== undefined)
         ) {
           list[i] = targetList[i]
         }
@@ -110,9 +112,9 @@ export default class Merge {
 
     if (temp.length > 0) {
       return opts.type === 'unshift' ? temp.concat(list) : list.concat(temp)
-    } else {
-      return list
     }
+
+    return list
   }
 
   /**
@@ -125,7 +127,11 @@ export default class Merge {
   mergeObject(source, target, options = {}) {
     const opts = {
       ...this.options.object,
-      ...options,
+      ...options
+    }
+
+    if (!util.isObject(source)) {
+      throw new Error('`source` should be an object')
     }
 
     // 强制 target 为 object
@@ -133,15 +139,13 @@ export default class Merge {
       return target
     }
 
-    const result = { ...source }
+    const result = {...source}
     const targetObject = Object.assign({}, target)
 
     for (const key in targetObject) {
       if (
-        !opts.nullable ||
-        targetObject[key] !== null ||
-        !opts.undefinable ||
-        targetObject[key] !== undefined
+        (opts.nullable || targetObject[key] !== null) &&
+        (opts.undefinable || targetObject[key] !== undefined)
       ) {
         result[key] = this.merge(result[key], target[key])
       }
