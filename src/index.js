@@ -37,15 +37,21 @@ export default class Merge {
     }
   }
 
-  merge(source, target) {
+  merge(source, target, options = {}) {
     // 数组合并
     if (util.isArray(source)) {
-      return this.mergeArray(source, target, this.options.array)
+      return this.mergeArray(source, target, {
+        ...this.options.array,
+        ...options,
+      })
     }
 
     // 对象合并
     if (util.isObject(source)) {
-      return this.mergeObject(source, target, this.options.object)
+      return this.mergeObject(source, target, {
+        ...this.options.object,
+        ...options,
+      })
     }
 
     return target
@@ -59,13 +65,18 @@ export default class Merge {
    * @param options {Object}
    */
   mergeArray(source, target, options = {}) {
+    const opts = {
+      ...this.options.array,
+      ...options,
+    }
+
     // 强制 target 为 array
-    if (options.array && !util.isArray(target)) {
+    if (opts.array && !util.isArray(target)) {
       return target
     }
 
     // replace 替换
-    if (options.type === 'replace') {
+    if (opts.type === 'replace') {
       return target
     }
 
@@ -76,24 +87,21 @@ export default class Merge {
     for (let i = 0, len = targetList.length; i < len; i++) {
       const index = list.indexOf(targetList[i])
 
-      if (options.type === 'push' || options.type === 'unshift') {
+      if (opts.type === 'push' || opts.type === 'unshift') {
         // 移除共有元素
-        if (options.filter && index !== -1) {
+        if (opts.filter && index !== -1) {
           list.splice(index, 1)
         } else {
           temp.push(targetList[i])
         }
-      } else if (options.type === 'merge') {
-        if (options.merge) {
-          list[i] = merge(
-            list[i],
-            targetList[i],
-            util.isObject(options.merge) ? options.merge : {}
-          )
+      } else if (opts.type === 'merge') {
+        if (opts.merge) {
+          list[i] = this.merge(list[i], targetList[i])
         } else if (
-          options.nullable ||
+          opts.nullable ||
           targetList[i] !== null ||
-          (options.undefinable || targetList[i] !== undefined)
+          opts.undefinable ||
+          targetList[i] !== undefined
         ) {
           list[i] = targetList[i]
         }
@@ -101,7 +109,7 @@ export default class Merge {
     }
 
     if (temp.length > 0) {
-      return options.type === 'unshift' ? temp.concat(list) : list.concat(temp)
+      return opts.type === 'unshift' ? temp.concat(list) : list.concat(temp)
     } else {
       return list
     }
@@ -115,8 +123,13 @@ export default class Merge {
    * @param options
    */
   mergeObject(source, target, options = {}) {
+    const opts = {
+      ...this.options.object,
+      ...options,
+    }
+
     // 强制 target 为 object
-    if (options.object && !util.isObject(target)) {
+    if (opts.object && !util.isObject(target)) {
       return target
     }
 
@@ -124,6 +137,16 @@ export default class Merge {
     const targetObject = Object.assign({}, target)
 
     for (const key in targetObject) {
+      if (
+        !opts.nullable ||
+        targetObject[key] !== null ||
+        !opts.undefinable ||
+        targetObject[key] !== undefined
+      ) {
+        result[key] = this.merge(result[key], target[key])
+      }
     }
+
+    return result
   }
 }
