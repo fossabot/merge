@@ -11,7 +11,7 @@ import * as util from './util'
  */
 function mergeArray(source, target, options = {}) {
   const opts = {
-    // push | unshift | replace
+    // push | unshift | merge | replace
     type: 'replace',
     // 是否强制 target 为数组
     array: true,
@@ -31,6 +31,11 @@ function mergeArray(source, target, options = {}) {
     return target
   }
 
+  // replace 替换
+  if (opts.type === 'replace') {
+    return target
+  }
+
   const targetList = util.isArray(target) ? target : [target]
   const list = source.concat([])
   const temp = []
@@ -45,7 +50,7 @@ function mergeArray(source, target, options = {}) {
       } else {
         temp.push(targetList[i])
       }
-    } else if (opts.type === 'replace') {
+    } else if (opts.type === 'merge') {
       if (opts.merge) {
         list[i] = merge(
           list[i],
