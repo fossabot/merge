@@ -1,0 +1,9 @@
+{
+  "extends": "uber-es2015",
+  "rules": {
+    "semi": ["error", "never"]
+  },
+  "env": {
+    "jest": true
+  }
+}
