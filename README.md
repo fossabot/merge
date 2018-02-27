@@ -5,14 +5,14 @@ A util for merge object.
 [![CircleCI](https://circleci.com/gh/blackcater/merge/tree/master.svg?style=svg)](https://circleci.com/gh/blackcater/merge/tree/master)
 [![Coverage Status](https://coveralls.io/repos/github/blackcater/merge/badge.svg?branch=v1)](https://coveralls.io/github/blackcater/merge?branch=v1)
 
-<h2 aligen="center">↓ Install</h2> 
+<h2 align="center">↓ Install</h2> 
 
 ```javascript
 $ yarn add @blackcater/merge
 ```
 
 
-<h2 aligen="center">↓ Usage</h2>
+<h2 align="center">↓ Usage</h2>
 
 ```javascript
 import { merge } from '@blackcater/merge'
@@ -29,7 +29,7 @@ merge([1, { a: 2 }], [3, { b: 4 }], { type: 'merge' }) // [3, { a: 2, b: 4 }]
 ```
 
 
-<h2 aligen="center">↓ API</h2>
+<h2 align="center">↓ API</h2>
 
 ### new Merge(options)
 
@@ -37,7 +37,7 @@ Project export a `Merge` class. You can pass an options to control the merge cat
 
 The default option is bellow:
 
-```json
+```
 {
   // options for merge array
   array: {
@@ -88,7 +88,7 @@ merge.merge({ a: 1 }, { b: 2 }) // { a: 1, b: 2 }
 
 You can pass an options. Below is the default value of options
 
-```json
+```
 {
   // strategy for merging array. You can choose push/unshift/merge/replace
   type: 'replace',
@@ -122,7 +122,7 @@ merge.mergeArray([1, 2], [null, undefined], { type: 'merge', nullable: false, un
 
 You can pass an options. Below is the default value of options
 
-```json
+```
 {
   // target parameter must be an object
   object: true,
@@ -154,6 +154,6 @@ For convenience, project exports an instance of Merge.
 import { merge, mergeArray, mergeObject } from '@blackctaer/merge'
 ```
 
-<h2 aligen="center">↓ LICENSE</h2>
+<h2 align="center">↓ LICENSE</h2>
 
 [MIT@blackcater](LICENSE)
