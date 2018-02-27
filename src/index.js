@@ -16,7 +16,7 @@ export default class Merge {
         // 是否强制 target 为数组
         array: true,
         // 是否去除共有元素
-        filter: true,
+        filter: false,
         // 是否对子元素进行 merge 操作
         merge: false,
         // null 值是否有意义
@@ -42,7 +42,7 @@ export default class Merge {
     if (util.isArray(source)) {
       return this.mergeArray(source, target, {
         ...this.options.array,
-        ...options
+        ...(options.array || {})
       })
     }
 
@@ -50,7 +50,7 @@ export default class Merge {
     if (util.isObject(source)) {
       return this.mergeObject(source, target, {
         ...this.options.object,
-        ...options
+        ...(options.object || {})
       })
     }
 
@@ -156,3 +156,6 @@ export default class Merge {
     return result
   }
 }
+export const merge = new Merge()
+export const mergeArray = merge.mergeArray.bind(merge)
+export const mergeObject = merge.mergeObject.bind(merge)

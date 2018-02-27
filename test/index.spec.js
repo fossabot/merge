@@ -131,8 +131,11 @@ describe('Merge', () => {
         2
       ])
       expect(
-        merge8.mergeArray([1, [1], {a: 1}], ['a', ['a'], {a: 'a'}])
-      ).toMatchObject(['a', ['a'], {a: 'a'}])
+        merge8.mergeArray(
+          [1, [1], {a: 1, b: 2}],
+          ['a', ['a'], {a: 'a', c: 3}]
+        )
+      ).toMatchObject(['a', ['a'], {a: 'a', b: 2, c: 3}])
       expect(
         merge9.mergeArray(
           [{a: 1}, [1], 1, 2, null, undefined],
