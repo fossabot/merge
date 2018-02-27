@@ -33,3 +33,9 @@ test('util.isType', () => {
   expect(util.isType('object')(new Object({}))).toBe(true)
   expect(util.isType('function')(() => undefined)).toBe(true)
 })
+
+test('util.isIterable', () => {
+  expect(util.isIterable(1)).toBe(false)
+  expect(util.isIterable('123')).toBe(true)
+  expect(util.isIterable([1, 2, 3])).toBe(true)
+})

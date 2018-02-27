@@ -4,3 +4,6 @@ export const isType = type => obj =>
 export const isArray = isType('array')
 
 export const isObject = isType('object')
+
+export const isIterable = object =>
+  object !== null && typeof object[Symbol.iterator] === 'function'

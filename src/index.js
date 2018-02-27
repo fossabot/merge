@@ -60,9 +60,9 @@ export default class Merge {
   /**
    * 数组合并
    *
-   * @param source {Array}
-   * @param target {Any}
-   * @param options {Object}
+   * @param source
+   * @param target
+   * @param options
    */
   mergeArray(source, target, options = {}) {
     const opts = {
@@ -75,18 +75,19 @@ export default class Merge {
     }
 
     // 强制 target 为 array
-    if (opts.array && !util.isArray(target)) {
+    if (opts.type === 'replace' && opts.array && !util.isArray(target)) {
       return target
     }
 
-    // replace 替换
-    if (opts.type === 'replace') {
-      return target
-    }
-
-    const targetList = util.isArray(target) ? target : [target]
+    const targetList = util.isArray(target) ?
+      target :
+      util.isIterable(target) ? [...target] : [target]
     const list = [...source]
     const temp = []
+
+    if (opts.type === 'replace') {
+      return targetList
+    }
 
     for (let i = 0, len = targetList.length; i < len; i++) {
       const index = list.indexOf(targetList[i])
@@ -95,6 +96,7 @@ export default class Merge {
         // 移除共有元素
         if (opts.filter && index !== -1) {
           list.splice(index, 1)
+          temp.push(targetList[i])
         } else {
           temp.push(targetList[i])
         }
