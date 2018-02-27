@@ -9,6 +9,9 @@
   "repository": "https://github.com/blackcater/merge.git",
   "author": "blackcater <blackcater2015@gmail.com>",
   "license": "MIT",
+  "files": [
+    "dist"
+  ],
   "private": false,
   "scripts": {
     "dev": "rollup -c rollup.config.js -w",
