@@ -1,4 +1,4 @@
-<h1 align="center"><span class="font-weight: bolder; font-size: 2em;">M</span>erge</h1>
+<h1 align="center"><span style="color:  rebeccapurple;">M</span>erge</h1>
 
 A util for merge object.
 
