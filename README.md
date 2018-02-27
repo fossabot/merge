@@ -2,6 +2,8 @@
 
 A util for merge object.
 
+[![CircleCI](https://circleci.com/gh/blackcater/merge/tree/master.svg?style=svg)](https://circleci.com/gh/blackcater/merge/tree/master)
+[![Coverage Status](https://coveralls.io/repos/github/blackcater/merge/badge.svg?branch=v1)](https://coveralls.io/github/blackcater/merge?branch=v1)
 
 ## → Install
 
