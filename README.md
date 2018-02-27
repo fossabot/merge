@@ -4,6 +4,7 @@ A util for merge object.
 
 [![CircleCI](https://circleci.com/gh/blackcater/merge/tree/master.svg?style=svg)](https://circleci.com/gh/blackcater/merge/tree/master)
 [![Coverage Status](https://coveralls.io/repos/github/blackcater/merge/badge.svg?branch=master)](https://coveralls.io/github/blackcater/merge?branch=master)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fblackcater%2Fmerge.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fblackcater%2Fmerge?ref=badge_shield)
 
 <h2 align="center">↓ Install</h2> 
 
@@ -157,3 +158,7 @@ import { merge, mergeArray, mergeObject } from '@blackctaer/merge'
 <h2 align="center">↓ LICENSE</h2>
 
 [MIT@blackcater](LICENSE)
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fblackcater%2Fmerge.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fblackcater%2Fmerge?ref=badge_large)
