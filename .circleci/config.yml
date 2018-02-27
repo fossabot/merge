@@ -1,0 +1,30 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/merge-project
+    docker:
+      - image: circleci/node:9
+    branches:
+      only:
+        - dev
+        - master
+        - /v.*/
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: "using yarn and installing dependencies"
+          command: |
+            sudo npm install -g yarn
+            yarn install
+      - save_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
+      - run:
+          name: "lint and jest"
+          command: |
+            yarn lint
+            yarn test:coverage
+            yarn coveralls

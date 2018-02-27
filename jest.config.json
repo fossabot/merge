@@ -1,0 +1,26 @@
+{
+  "collectCoverageFrom": [
+    "src/**/*.js"
+  ],
+  "coverageDirectory": "<rootDir>/coverage",
+  "coveragePathIgnorePatterns": [
+    "<rootDir>/dist/",
+    "<rootDir>/node_modules/",
+    "<rootDir>/test",
+    "<rootDir>/coverage"
+  ],
+  "globals": {},
+  "moduleNameMapper": {
+    "^@/(.*)": "<rootDir>/src/$1"
+  },
+  "moduleFileExtensions": [
+    "js",
+    "json"
+  ],
+  "notify": true,
+  "transform": { "^.+\\.js$": "babel-jest" },
+  "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?)$",
+  "watchPathIgnorePatterns": [
+    "<rootDir>/node_modules/"
+  ]
+}
